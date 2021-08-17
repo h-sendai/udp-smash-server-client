@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
     }
 
     //for (long i = 0; i < start_command.n_packet - 1; ++i) {
-    for (long i = 0; i < last_index - 1; ++i) {
+    for (long i = 0; i < last_index; ++i) {
         struct timespec diff;
         timespecsub(&ts_buf[i+1], &ts_buf[i], &diff);
         printf("%ld.%09ld %ld.%09ld\n", 
