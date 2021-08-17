@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     int port = 1234;
     int c;
     int so_sndbuf = -1;
-    while ( (c = getopt(argc, argv, "dhp:")) != -1) {
+    while ( (c = getopt(argc, argv, "dhp:s:")) != -1) {
         switch (c) {
             case 'd':
                 debug += 1;
