@@ -21,7 +21,7 @@ int debug = 0;
 
 int usage()
 {
-    char msg[] = "Usage: client [-d] [-h] [-n n_packet] [-s packet_size] server_ip_address";
+    char msg[] = "Usage: client [-d] [-h] [-n n_packet] [-s packet_size] [-r so_rcvbuf] server_ip_address";
     fprintf(stderr, "%s\n", msg);
 
     return 0;
