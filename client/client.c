@@ -101,6 +101,7 @@ int main(int argc, char *argv[])
     if (buf == NULL) {
         err(1, "malloc for buf");
     }
+    memset(buf, 0, bufsize);
 
     //struct timespec ts_prev, ts_now, ts_diff;
     //ts_prev.tv_sec  = 0;
@@ -109,6 +110,7 @@ int main(int argc, char *argv[])
     if (ts_buf == NULL) {
         err(1, "malloc for ts_buf");
     }
+    memset(ts_buf, 0, sizeof(struct timespec)*start_command.n_packet);
 
     long last_index = 0;
     for (long i = 0; i < start_command.n_packet; ++i) {
