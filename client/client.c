@@ -112,11 +112,21 @@ int main(int argc, char *argv[])
     }
     memset(ts_buf, 0, sizeof(struct timespec)*start_command.n_packet);
 
+    if (set_so_rcvtimeout(sockfd, 2, 0) < 0) {
+        exit(1);
+    }
+
     long last_index = 0;
     for (long i = 0; i < start_command.n_packet; ++i) {
         int n = read(sockfd, buf, bufsize);
         if (n < 0) {
-            err(1, "read");
+            if (errno == EAGAIN) {
+                fprintf(stderr, "timeout");
+                exit(1);
+            }
+            else {
+                err(1, "read");
+            }
         }
         if (debug) {
             fprintfwt(stderr, "%ld\n", i);
