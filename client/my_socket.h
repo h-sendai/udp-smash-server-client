@@ -39,9 +39,12 @@ extern int set_so_nodelay(int sockfd);
 extern int set_so_quickack(int sockfd);
 extern int get_so_rcvlowat(int sockfd);
 extern int set_so_rcvlowat(int sockfd, int lowat);
+extern int set_so_rcvtimeout(int sockfd, long tv_sec, long tv_usec);
 
 extern int tcp_listen(int port);
 extern int accept_connection(int port);
 
 extern int get_port_num(int sockfd);
+/* convert MiB (1024 base) to Giga (1000 base) bit */
+extern double MiB2Gb(double x);
 #endif

@@ -2,12 +2,26 @@
 
 int tcp_socket(void)
 {
-    return socket(AF_INET, SOCK_STREAM, 0);
+    int sockfd;
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        warn("socket(AF_INET, SOCK_STREAM, 0)");
+        return -1;
+    }
+
+    return sockfd;
 }
 
 int udp_socket(void)
 {
-    return socket(AF_INET, SOCK_DGRAM, 0);
+    int sockfd;
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sockfd < 0) {
+        warn("socket(AF_INET, SOCK_DGRAM, 0)");
+        return -1;
+    }
+
+    return sockfd;
 }
 
 int connect_tcp_timeout(int sockfd, char *host, int port, int timeout_sec)
@@ -362,3 +376,16 @@ double MiB2Gb(double x)
 {
     return x*1024.0*1024.0*8/1000000000.0;
 }
+
+int set_so_rcvtimeout(int sockfd, long tv_sec, long tv_usec)
+{
+    struct timeval timeout = { tv_sec, tv_usec };
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
+        warn("setsockopt SO_RCVTIMEO");
+        return -1;
+    }
+
+    return 0;
+}
+
